@@ -20,14 +20,18 @@ Wgsim is orginally a small tool for simulating sequence reads from a reference g
 
 ### AUPR score may bias toward low-precision and high-recall classifiers (such as DNA-to-DNA methods)
 ![AUPR](NewSim_auprc_bracken-metaplhan2_boxplot.png)
-The AUPR score can be calculated using either actual abundance or "binary" abundance. In the [CELL paper](https://www.sciencedirect.com/science/article/pii/S0092867419307755), authors used AUPR which essentially calculated as the area under the precision-recall curve by ranging the actual abundance threshold from 0 to 1.0. However, this AUPR score biased toward low-precision and high-recall classifiers (such as Bracken or Kracken with bigger database), which can’t reflect the high-false-positive issue. In the real-world, it is impractical for a user to set an abundance threshold to filter potential false positives (especially for a highly complex microbiome sample). Therefore, we here proposed to calculate AUPR score using the presence of false positives and true positives in the observed profiles. 
+The AUPR score can be calculated using either actual abundance or "binary" abundance. In the [CELL paper](https://www.sciencedirect.com/science/article/pii/S0092867419307755), authors used AUPR which essentially calculated as the area under the precision-recall curve by ranging the actual abundance threshold from 0 to 1.0. However, this AUPR score biased toward low-precision and high-recall classifiers (such as Bracken or Kracken with a more comprehensive database), which can’t reflect the high-false-positive issue. In the real-world, it is impractical for a user to set an abundance threshold to filter potential false positives (especially for a highly complex microbiome sample). Therefore, we here proposed to calculate AUPR score using the presence of false positives and true positives in the observed profiles. 
 ### L2 distance calculated using sequence or taxonomic abundance profiles as the expected results
 ![L2_dist](NewSim_L2.dist_bracken-metaplhan2_boxplot.png)
 The L2 distance between observed abundance and expected abundance, where can be defined by either sequence or taxonomic abundance in the ground truth.
 
 ## Reference
 * Ye, S.H., Siddle, K.J., Park, D.J., and Sabeti, P.C. (2019). Benchmarking Metagenomics Tools for Taxonomic Classification. Cell 178, 779-794.
+* D., Foox, J., Ahsanuddin, S., et al. (2017). Comprehensive benchmarking and ensemble approaches for metagenomic classifiers. Genome Biology 18.
 * Segata, N., Waldron, L., Ballarini, A., Narasimhan, V., Jousson, O., and Huttenhower, C. (2012). Metagenomic microbial community profiling using unique clade-specific marker genes. Nat Methods 9, 811-+.
+* Mende, D.R., Waller, A.S., Sunagawa, S., Jarvelin, A.I., Chan, M.M., Arumugam, M., Raes, J., and Bork, P. (2012). Assessment of Metagenomic Assembly Using Simulated Next Generation Sequencing Data. Plos One 7.
 * Truong, D.T., Franzosa, E.A., Tickle, T.L., Scholz, M., Weingart, G., Pasolli, E., Tett, A., Huttenhower, C., and Segata, N. (2015). MetaPhlAn2 for enhanced metagenomic taxonomic profiling. Nat Methods 12, 902-903.
 * Wood, D.E., and Salzberg, S.L. (2014). Kraken: ultrafast metagenomic sequence classification using exact alignments. Genome Biology 15.
+
+
 
