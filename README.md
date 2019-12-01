@@ -13,7 +13,11 @@ In the [recent paper](https://www.sciencedirect.com/science/article/pii/S0092867
 However, both AUPR score using actual abudance and L2 distance using 'raw' profiling results from profilers can provide misleading benchmarking results.
 
 ## RE-benchmarking using differential metrics
-### Data simulation using a series of genomes with explicit genome length.
+### Data simulation using a series of genomes (N=10, 20, 50, 200, and 500) with explicit genome length.
+We employed [Wgsim](https://github.com/lh3/wgsim) to simulate metagenomics data with a given number of genomes.
+Wgsim is orginally a small tool for simulating sequence reads from a reference genome. Here we mixed the genomic sequences from different microbial taxa at the certain percentages in a fasta file and then took as input for Wgsim. 
+
+
 ### AUPR score may bias toward low-precision and high-recall classifiers (such as DNA-to-DNA methods)
 ![AUPR](NewSim_auprc_bracken-metaplhan2_boxplot.png)
 The AUPR score can be calculated using either actual abundance or "binary" abundance. In the [CELL paper](https://www.sciencedirect.com/science/article/pii/S0092867419307755), authors used AUPR which essentially calculated as the area under the precision-recall curve by ranging the actual abundance threshold from 0 to 1.0. However, this AUPR score biased toward low-precision and high-recall classifiers (such as Bracken or Kracken with bigger database), which can’t reflect the high-false-positive issue. In the real-world, it is impractical for a user to set an abundance threshold to filter potential false positives (especially for a highly complex microbiome sample). Therefore, we here proposed to calculate AUPR score using the presence of false positives and true positives in the observed profiles. 
