@@ -14,7 +14,7 @@ Microbial identification and accurate abundance estimation are still challenging
 ## RE-benchmarking using differential metrics
 
 ![AUPR](NewSim_auprc_bracken-metaplhan2_boxplot.png)
-The AUPR score can be calculated using either actual abundance and binary abundance. In the [CELL paper] (https://www.sciencedirect.com/science/article/pii/S0092867419307755), authors used AUPR which essentially calculated as the area under the precision-recall curve by ranging the actual abundance threshold from 0 to 1.0. However, this AUPR score biased toward low-precision and high-recall classifiers (such as Bracken or Kracken with bigger database), which can’t reflect the high-false-positive issue. 
+The AUPR score can be calculated using either actual abundance and binary abundance. In the [CELL paper](https://www.sciencedirect.com/science/article/pii/S0092867419307755), authors used AUPR which essentially calculated as the area under the precision-recall curve by ranging the actual abundance threshold from 0 to 1.0. However, this AUPR score biased toward low-precision and high-recall classifiers (such as Bracken or Kracken with bigger database), which can’t reflect the high-false-positive issue. 
 ![L2_dist](NewSim_L2.dist_bracken-metaplhan2_boxplot.png)
 The L2 distance between observed abundance and expected abundance, where can be defined by either sequence or taxonomic abundance in the ground truth.
 
