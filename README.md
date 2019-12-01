@@ -12,9 +12,10 @@ Microbial identification and accurate abundance estimation are still challenging
 In the [recent paper](https://www.sciencedirect.com/science/article/pii/S0092867419307755) published on CELL, authors review current state-of-the-art approaches for metagenomic analysis and evaluate the performance of 20 metagenomic classifiers by two key metrics (AUPR score and L2 distance) on simulated and experimental datasets.
 
 ## RE-benchmarking using differential metrics
-
+### AUPR score may bias toward low-precision and high-recall classifiers (such as DNA-to-DNA methods)
 ![AUPR](NewSim_auprc_bracken-metaplhan2_boxplot.png)
-The AUPR score can be calculated using either actual abundance or "binary" abundance. In the [CELL paper](https://www.sciencedirect.com/science/article/pii/S0092867419307755), authors used AUPR which essentially calculated as the area under the precision-recall curve by ranging the actual abundance threshold from 0 to 1.0. However, this AUPR score biased toward low-precision and high-recall classifiers (such as Bracken or Kracken with bigger database), which can’t reflect the high-false-positive issue. 
+The AUPR score can be calculated using either actual abundance or "binary" abundance. In the [CELL paper](https://www.sciencedirect.com/science/article/pii/S0092867419307755), authors used AUPR which essentially calculated as the area under the precision-recall curve by ranging the actual abundance threshold from 0 to 1.0. However, this AUPR score biased toward low-precision and high-recall classifiers (such as Bracken or Kracken with bigger database), which can’t reflect the high-false-positive issue.
+### L2 distance using sequence or taxonomic abundance profiles as expected results
 ![L2_dist](NewSim_L2.dist_bracken-metaplhan2_boxplot.png)
 The L2 distance between observed abundance and expected abundance, where can be defined by either sequence or taxonomic abundance in the ground truth.
 
