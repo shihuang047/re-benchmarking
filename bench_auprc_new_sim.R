@@ -241,7 +241,8 @@ p<-ggplot(auprc_2_summ_m, aes(x=profiler, y=value)) + geom_boxplot(outlier.shape
   facet_wrap(~metric) + 
   theme_bw()
 p
-ggsave(filename="./NewSim_auprc_bracken-metaplhan2_boxplot.pdf", plot=p, width =5 , height=4)
+ggsave(filename="./NewSim_auprc_bracken-metaplhan2_boxplot.pdf", plot=p, width =5 , height=4) 
+ggsave(filename="./NewSim_auprc_bracken-metaplhan2_boxplot.png", plot=p, device="png", width =5 , height=4) 
 L2_2_summ_m<-subset(L2_summ_m, profiler!="IIB")
 p<-ggplot(L2_2_summ_m, aes(x=profiler, y=value)) + geom_boxplot(outlier.shape = NA) + 
   ylab("L2 distance")+
@@ -250,4 +251,5 @@ p<-ggplot(L2_2_summ_m, aes(x=profiler, y=value)) + geom_boxplot(outlier.shape = 
   theme_bw()
 p
 ggsave(filename="./NewSim_L2.dist_bracken-metaplhan2_boxplot.pdf", plot=p, width =5 , height=4)
+ggsave(filename="./NewSim_L2.dist_bracken-metaplhan2_boxplot.png", plot=p, device="png", width =5 , height=4) 
 
