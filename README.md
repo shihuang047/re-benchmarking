@@ -15,7 +15,7 @@ However, both AUPR score using actual abudance and L2 distance using 'raw' profi
 ## RE-benchmarking using differential metrics
 ### Data simulation using a series of genomes (N=10, 20, 50, 200, and 500) with explicit genome length.
 We employed [Wgsim](https://github.com/lh3/wgsim) to simulate metagenomics data with a given number of genomes.
-Wgsim is orginally a small tool for simulating sequence reads from a reference genome. Here we mixed the genomic sequences from different microbial taxa at the certain percentages in a fasta file and then took as input for Wgsim. 
+Wgsim is originally a small tool for simulating sequence reads from a reference genome. Here we mixed the genomic sequences from multiple microbial taxa at certain percentages in a fasta file and then took it as input for Wgsim.
 
 
 ### AUPR score may bias toward low-precision and high-recall classifiers (such as DNA-to-DNA methods)
