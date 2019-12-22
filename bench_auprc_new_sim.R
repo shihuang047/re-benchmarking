@@ -5,7 +5,6 @@
 #' output: html_document
 #' ---
 
-
 #' Install and load necessary libraries for data analyses
 #'-------------------------------
 p <- c("reshape2","ggplot2","pheatmap","combinat","plyr", "doMC", "cowplot", "pROC", "readxl", "precrec")
@@ -28,6 +27,7 @@ IIb_transformer<-function(IIb_output_file){
   IIb_output[, "Sequenced_Reads_Num.Theoretical_Tag_Num"]<-100*(IIb_output[, "Sequenced_Reads_Num.Theoretical_Tag_Num"]/sum(IIb_output[, "Sequenced_Reads_Num.Theoretical_Tag_Num"]))
   observed_tab<-IIb_output[, c("Specie", "Sequenced_Reads_Num.Theoretical_Tag_Num")]
   colnames(observed_tab)<-c("taxID", "observed_abd")
+  observed_tab$observed_abd<-observed_tab$observed_abd/100
   observed_tab
 }
 IIb_transformer(IIb_output_file)
@@ -42,6 +42,7 @@ bracken_transformer<-function(bracken_output_file, RANK="S"){
   bracken_output<-read.table(bracken_output_file, sep="\t", header=F)
   colnames(bracken_output)<-braken_columns
   observed_tab<-subset(bracken_output, rank==RANK)[, c("taxID", "observed_abd")]
+  observed_tab$observed_abd<-observed_tab$observed_abd/100
   observed_tab
 }
 bracken_output_files<-list.files("bracken.kreport", path = "NewSimDatasets_Results/")
@@ -59,6 +60,7 @@ mpa2_transformer<-function(mpa2_output_file){
   #mpa2_output<-merge(mpa2_taxname_dic2, mpa2_output, by=c(1, 1), all.y=T)
   colnames(mpa2_output)<-c("taxID", "taxname", "observed_abd")
   observed_tab<-mpa2_output
+  observed_tab$observed_abd<-observed_tab$observed_abd/100
   observed_tab
 }
 mpa2_transformer(mpa2_output_file)
@@ -100,7 +102,7 @@ exp_tab_list<-lapply(exp_list, exp_transformer)
 #' @example 
 #' 
 #' expected_tab<-data.frame(taxID=c("123", "12", "39", "28"), 
-#'                          sequence_abd=c(0.4, 0.3, 0.2, 0.1))
+#'                          exp_sequence_abd=c(0.4, 0.3, 0.2, 0.1))
 #' observed_tab0<-data.frame(taxID=c("12", "1", "39", "28"), 
 #'                          observed_abd=c(0, 0.3, 0.7, 0))
 #' get.perf.from.tabs(expected_tab, observed_tab0)
@@ -115,10 +117,12 @@ get.perf.from.tabs<-function(expected_tab, observed_tab){
     stop("The input expected tables should have the column of 'exp_sequence_abd' !")
   if(!'taxID' %in% colnames(expected_tab) | !'taxID' %in% colnames(observed_tab))
     stop("The input expected and observed tables should have the column of 'taxID' !")
-  if(all(range(expected_tab$exp_taxonomy_abd)<1)) expected_tab$exp_taxonomy_abd<-expected_tab$exp_taxonomy_abd*100
-  if(all(range(expected_tab$exp_sequence_abd)<1)) expected_tab$exp_sequence_abd<-expected_tab$exp_sequence_abd*100
+  #if(all(range(expected_tab$exp_taxonomy_abd)<1)) expected_tab$exp_taxonomy_abd<-expected_tab$exp_taxonomy_abd*100
+  #if(all(range(expected_tab$exp_sequence_abd)<1)) expected_tab$exp_sequence_abd<-expected_tab$exp_sequence_abd*100
+  
   conf<-merge(expected_tab, observed_tab, all = TRUE)
-  #conf<-subset(conf, observed_abd>0)
+  conf<-subset(conf, observed_abd>0)
+  
   conf$bi_exp_sequence_abd<-as.integer(!is.na(conf$exp_sequence_abd))
   conf$bi_exp_taxonomy_abd<-as.integer(!is.na(conf$exp_taxonomy_abd))
   conf$bi_observed_abd<-as.integer(!is.na(conf$observed_abd))
@@ -134,17 +138,33 @@ get.perf.from.tabs<-function(expected_tab, observed_tab){
   #sscurves_abd_all <- evalmod(scores = conf$observed_abd, labels = conf$sequence_abd)
   auc_res_bi<-auc(sscurves_bi)
   auc_res_abd<-auc(sscurves_abd)
-  L2_dist<-function(conf){
-    d_seq<-(conf[,"exp_sequence_abd"]-conf[,"observed_abd"])/100
-    L2_seq<-norm(as.matrix(d_seq), "f")
-    d_tax<-(conf[,"exp_taxonomy_abd"]-conf[,"observed_abd"])/100
-    L2_tax<-norm(as.matrix(d_tax), "f")
+  # abundance-estimation metrics
+  L2<-function(x, y){
+    d<-x-y
+    sqrt(sum(d^2, na.rm=T))
+  }
+  rJSD <- function(x, y){
+    if(any(x>1, na.rm=T) && any(y>1, na.rm=T)) 
+      x<-x/100; y<-y/100
+    z <- 0.5 * (x + y) 
+    out<- sqrt(0.5 * (sum(x * log(x / z), na.rm=T) + sum(y * log(y / z), na.rm=T)))
+    return(out)
+  }
+  abd_metrics<-function(conf){
+    conf_seq<-data.frame(conf[,c("exp_sequence_abd","observed_abd")])
+    conf_tax<-data.frame(conf[,c("exp_taxonomy_abd","observed_abd")])
+    L2_seq<-with(conf_seq, L2(exp_sequence_abd,observed_abd))
+    L2_tax<-with(conf_tax, L2(exp_taxonomy_abd,observed_abd))
+    rJSD_seq<-with(conf_seq, rJSD(exp_sequence_abd,observed_abd))
+    rJSD_tax<-with(conf_tax, rJSD(exp_taxonomy_abd,observed_abd))
     result<-list()
     result$L2_seq<-L2_seq
     result$L2_tax<-L2_tax
+    result$rJSD_seq<-rJSD_seq
+    result$rJSD_tax<-rJSD_tax
     result
   }
-  L2<-L2_dist(conf)
+  abd_eval<-abd_metrics(conf)
   # p_res<-autoplot(sscurves) autoplot is not able to be output.
   result<-list()
   result$auprc_abd<-auc_res_abd[,4][2]
@@ -154,8 +174,10 @@ get.perf.from.tabs<-function(expected_tab, observed_tab){
   result$conf<-conf
   result$sscurves_abd<-sscurves_abd
   result$sscurves_bi<-sscurves_bi
-  result$L2_seq<-L2$L2_seq
-  result$L2_tax<-L2$L2_tax
+  result$L2_seq<-abd_eval$L2_seq
+  result$L2_tax<-abd_eval$L2_tax
+  result$rJSD_seq<-abd_eval$rJSD_seq
+  result$rJSD_tax<-abd_eval$rJSD_tax
   result
 }
 
@@ -173,22 +195,17 @@ get.perf.from.tabs<-function(expected_tab, observed_tab){
 
 datasets<-c("simulate_10","simulate_20","simulate_50","simulate_200","simulate_500")
 #datasets<-datasets[-1] #[-8:-length(datasets)] ### remove those datasets with no positives
-perf_summ<-data.frame(matrix(NA, ncol=12, nrow=length(datasets)))
+perf_summ<-data.frame(matrix(NA, ncol=18, nrow=length(datasets)))
 colnames(perf_summ)<-c("auprc_abd__Bracken", "auprc_abd__IIB", "auprc_abd__Metaphlan2", 
                        "auprc_bi__Bracken", "auprc_bi__IIB", "auprc_bi__Metaphlan2", 
                        "L2_tax__Bracken",  "L2_tax__IIB", "L2_tax__Metaphlan2",
-                       "L2_seq__Bracken",  "L2_seq__IIB", "L2_seq__Metaphlan2") 
+                       "L2_seq__Bracken",  "L2_seq__IIB", "L2_seq__Metaphlan2",
+                       "rJSD_tax__Bracken",  "rJSD_tax__IIB", "rJSD_tax__Metaphlan2",
+                       "rJSD_seq__Bracken",  "rJSD_seq__IIB", "rJSD_seq__Metaphlan2") 
 rownames(perf_summ)<-datasets
 for(i in 1:length(datasets)){
-  expected<-exp_list[[i]]
-  expected_3<-expected[, c("taxID", "exp_taxonomy_abd", "exp_sequence_abd")]
-  expected_3$exp_sequence_abd<-expected_3$exp_sequence_abd*100
-  expected_3$exp_taxonomy_abd<-expected_3$exp_taxonomy_abd*100
-  #mpa2_col_id<-paste(datasets[i], "__mpa2", sep="")
-  #bracken_col_id<-paste(datasets[i], "__bracken",sep="")
-  ## remove those taxID with zero abundance in the observations
-  #mpa2_2<-mpa2[, c("taxID", mpa2_col_id)]; mpa2_2<-mpa2_2[mpa2_2[,2]>0, ]
-  #bracken_2<-bracken_refseq[, c("taxID", bracken_col_id)]; bracken_2<-bracken_2[bracken_2[,2]>0, ]
+  #exp_tab_list[[i]]$exp_sequence_abd<-exp_tab_list[[i]]$exp_sequence_abd*100
+  #exp_tab_list[[i]]$exp_taxonomy_abd<-exp_tab_list[[i]]$exp_taxonomy_abd*100
   ## get auprc score
   bracken_res<-get.perf.from.tabs(expected_tab = exp_tab_list[[i]], observed_tab = bracken_list[[i]])
   IIb_res<-get.perf.from.tabs(expected_tab = exp_tab_list[[i]], observed_tab = IIb_list[[i]])
@@ -205,6 +222,12 @@ for(i in 1:length(datasets)){
   perf_summ[i, 10]<-bracken_res$L2_seq
   perf_summ[i, 11]<-IIb_res$L2_seq
   perf_summ[i, 12]<-mpa2_res$L2_seq
+  perf_summ[i, 13]<-bracken_res$rJSD_tax
+  perf_summ[i, 14]<-IIb_res$rJSD_tax
+  perf_summ[i, 15]<-mpa2_res$rJSD_tax
+  perf_summ[i, 16]<-bracken_res$rJSD_seq
+  perf_summ[i, 17]<-IIb_res$rJSD_seq
+  perf_summ[i, 18]<-mpa2_res$rJSD_seq
 }
 
 #' Benchmarking of all classifiers (i.e. IIB, Bracken and Metaphlan2)
@@ -214,7 +237,7 @@ perf_summ_m<-melt(perf_summ, id.vars = c("datasize"))
 temp<-data.frame(do.call(rbind, strsplit(as.character(perf_summ_m$variable), "__")))
 names(temp)<-c("metric", "profiler")
 perf_summ_m<-data.frame(temp, perf_summ_m)
-auprc_summ_m<-subset(perf_summ_m, metric!="L2_tax" & metric!="L2_seq")
+auprc_summ_m<-perf_summ_m[grep("auprc", perf_summ_m$metric), ]
 p<-ggplot(auprc_summ_m, aes(x=profiler, y=value)) + geom_boxplot(outlier.shape = NA) + 
   ylab("AUPR score")+
   geom_jitter(aes(color=datasize), width = 0.2) + 
@@ -223,11 +246,12 @@ p<-ggplot(auprc_summ_m, aes(x=profiler, y=value)) + geom_boxplot(outlier.shape =
 p
 ggsave(filename="./NewSim_auprc_3_boxplot.pdf", plot=p, width =5 , height=4)
 
+abd_eval_summ_m<-perf_summ_m[grep(paste(c("L2", "rJSD"), collapse="|"), perf_summ_m$metric), ]
 L2_summ_m<-subset(perf_summ_m, metric=="L2_tax" | metric=="L2_seq")
-p<-ggplot(L2_summ_m, aes(x=profiler, y=value)) + geom_boxplot(outlier.shape = NA) + 
+p<-ggplot(abd_eval_summ_m, aes(x=profiler, y=value)) + geom_boxplot(outlier.shape = NA) + 
   ylab("L2 distance")+
   geom_jitter(aes(color=datasize), width = 0.2) + 
-  facet_wrap(~metric) + 
+  facet_wrap(~metric, scales="free_y") + 
   theme_bw()
 p
 ggsave(filename="./NewSim_L2.dist_3_boxplot.pdf", plot=p, width =5 , height=4)
