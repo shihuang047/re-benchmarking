@@ -1,0 +1,20 @@
+taxID	consensus_taxonomy	abundance
+158	Treponema denticola [ref_mOTU_v25_06072]	0.056354582
+414	Methylococcus capsulatus [ref_mOTU_v25_03333]	0.069381162
+536	Chromobacterium violaceum [ref_mOTU_v25_00397]	0.047521317
+730	[Haemophilus] ducreyi [ref_mOTU_v25_06092]	0.072422973
+1097	Chlorobaculum tepidum [ref_mOTU_v25_05208]	0.022205784
+1299	Deinococcus radiodurans [ref_mOTU_v25_02207]	0.094151551
+1358	Lactococcus lactis [ref_mOTU_v25_01300]	0.013894103
+1513	Clostridium tetani [ref_mOTU_v25_02881]	0.038344331
+2188	Methanococcus voltae [ref_mOTU_v25_11254]	0.022256383
+32025	Helicobacter hepaticus [ref_mOTU_v25_04709]	0.045755237
+35554	Geobacter sulfurreducens [ref_mOTU_v25_04083]	0.061071617
+63363	Aquifex aeolicus [ref_mOTU_v25_10705]	0.086247591
+80849	Wolbachia endosymbiont of Brugia malayi [ref_mOTU_v25_10841]	0.095599133
+216816	Bifidobacterium longum [ref_mOTU_v25_01099]	0.018297592
+160	Treponema pallidum/paraluiscuniculi [ref_mOTU_v25_01851]	0.083299078
+82076	Picrophilus oshimae/torridus [ref_mOTU_v25_02363]	0.070320752
+157673	[Mannheimia] succiniciproducens/succiniciproducens [ref_mOTU_v25_06075]	0.041663956
+251701	Pseudomonas syringae/amygdali [ref_mOTU_v25_01209]	0.041257793
+79885	Bacillus marmarensis/pseudofirmus [ref_mOTU_v25_02939]	0.019955067

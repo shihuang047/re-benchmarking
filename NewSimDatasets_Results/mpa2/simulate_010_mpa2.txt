@@ -1,0 +1,12 @@
+taxid	#SampleID	Metaphlan2_Analysis
+2751	s__Carnobacterium_maltaromaticum	13.58211
+1685	s__Bifidobacterium_breve	13.51378
+118562	s__Arthrospira_platensis	12.7076
+28173	s__Vibrio_nigripulchritudo	12.56559
+1767	s__Mycobacterium_intracellulare	11.53137
+28123	s__Porphyromonas_asaccharolytica	7.18076
+84595	s__Gordonia_polyisoprenivorans	6.80966
+1264	s__Ruminococcus_albus	6.62913
+520	s__Bordetella_pertussis	6.33184
+486	s__Neisseria_lactamica	6.10792
+20141220	s__Arthrospira_maxima	3.04024
