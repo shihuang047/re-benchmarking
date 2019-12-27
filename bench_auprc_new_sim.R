@@ -326,6 +326,7 @@ p<-ggplot(ID_summ_m, aes(x=profiler, y=value)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 p
 ggsave(filename="./NewSim_ID_eval_boxplot.pdf", plot=p, width =5 , height=6)
+ggsave(filename="./NewSim_ID_eval_boxplot.png", plot=p, device="png", width =5 , height=6)
 
 abd_eval_summ_m<-perf_summ_m[grep(paste(c("L2", "rJSD"), collapse="|"), perf_summ_m$metric), ]
 L2_summ_m<-subset(perf_summ_m, metric=="L2_tax" | metric=="L2_seq")
@@ -338,5 +339,6 @@ p<-ggplot(abd_eval_summ_m, aes(x=profiler, y=value)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 p
 ggsave(filename="./NewSim_abd_eval_boxplot.pdf", plot=p, width =8 , height=6)
+ggsave(filename="./NewSim_abd_eval_boxplot.png", plot=p, device = "png",  width =8 , height=6)
 
 
