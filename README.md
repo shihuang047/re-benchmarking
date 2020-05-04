@@ -11,7 +11,7 @@ Microbial identification and accurate abundance estimation are still challenging
 **Abundance estimation: sequence abundance VS taxonomic abundance** Microbial abundance in the metagenomics data can be considered either as the relative abundance of reads from each taxa ("sequence abundance") or by inferring abundance of the number of individuals from each taxa by correcting read counts for genome size ("taxonomic abundance"). However, such correction for genome length into abundance estimation is usually missed in most state-of-the-art profilers. Even though it can be manually performed by reweighting the read counts after classification, [previous benchmarking studies](https://www.sciencedirect.com/science/article/pii/S0092867419307755) did not perform appropriate corrections and still used "raw" abundance profiles generated from benchmarked profilers for performance comparisons , resulting in highly misleading or even contradictory conclusions.
 
 
-## RE-benchmarking while sequence and taxonomic abundance strictly distinguished
+## RE-benchmarking
 ### Data simulation using a series of genomes with explicit genome length.
 We employed [Wgsim](https://github.com/lh3/wgsim) to simulate metagenomics data with a given number of genomes.
 Wgsim is originally a small tool for simulating sequence reads from a reference genome. Here we mixed the genomic sequences from multiple microbial taxa at certain percentages in a fasta file and then took it as input for Wgsim.
