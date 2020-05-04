@@ -1,6 +1,7 @@
 # RETHINKING benchmarking metagenomics classifers
 
 This repo contains the code to reproduce all of the analyses in the paper "Pitfalls and opportunities in benchmarking metagenomic classifiers" by Zheng, Huang et al. 2020.
+
 The raw data is available on figshare: https://figshare.com/projects/Pitfalls_and_Opportunities_in_Benchmarking_Metagenomic_Classifiers/
 
 ***
