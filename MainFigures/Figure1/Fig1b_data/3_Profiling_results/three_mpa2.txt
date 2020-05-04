@@ -1,0 +1,3 @@
+#SampleID	Metaphlan2_Analysis
+s__Lactobacillus_salivarius	66.18698
+s__Bacillus_pseudofirmus	33.81302

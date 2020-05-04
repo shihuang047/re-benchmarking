@@ -1,0 +1,22 @@
+library(RColorBrewer)
+library(ggplot2)
+library(ggsignif)
+all <-read.table(file = "Data_distance.txt",header = T,sep="\t", row.names=1)
+ggplot(data=all, aes(x=profilers,y=distance,fill=profilers))+
+    stat_boxplot(geom = "errorbar", colour="black",width=0.5)+
+    geom_point(aes(x=profilers,y=distance,color=Group))+
+    geom_boxplot()+theme_bw()+facet_grid(matrix~compared_with,scales = "free")+
+    geom_signif(comparisons = list(c("kraken2","mOTUs2"),c("kraken2","MPA2"),c("bracken","mOTUs2"),c("bracken","MPA2")),
+                step_increase = 0.1,map_signif_level = T,
+                test = t.test)+
+    scale_fill_manual(values = brewer.pal(7, "Set1"))
+
+
+ggplot(data=all, aes(x=profilers,y=distance,fill=profilers))+
+    stat_boxplot(geom = "errorbar", colour="black",width=0.5)+
+    geom_point(aes(x=profilers,y=distance,color=Group))+
+    geom_boxplot()+theme_bw()+facet_wrap(matrix~compared_with,scales = "free")+
+    geom_signif(comparisons = list(c("kraken2","mOTUs2"),c("kraken2","MPA2"),c("bracken","mOTUs2"),c("bracken","MPA2")),
+                step_increase = 0.1,map_signif_level = T,
+                test = t.test)+
+    scale_fill_manual(values = brewer.pal(7, "Set1"))

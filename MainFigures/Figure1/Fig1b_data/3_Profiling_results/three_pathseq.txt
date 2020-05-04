@@ -1,0 +1,17 @@
+tax_id	taxonomy	type	name	kingdom	score	score_normalized	reads	unambiguous	reference_length
+362948	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Lactobacillales|Lactobacillaceae|Lactobacillus|Lactobacillus_salivarius|Lactobacillus_salivarius_UCC118	no_rank	Lactobacillus_salivarius_UCC118	Bacteria	25470.0	49.40642458100559	25486	25454	2133977
+1	root	root	root	root	51552.0	100.0	51552	51552	0
+2	root|cellular_organisms|Bacteria	superkingdom	Bacteria	Bacteria	51552.0	100.0	51552	51552	0
+186817	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Bacillales|Bacillaceae	family	Bacillaceae	Bacteria	26082.0	50.59357541899441	26098	26066	0
+33958	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Lactobacillales|Lactobacillaceae	family	Lactobacillaceae	Bacteria	25470.0	49.40642458100559	25486	25454	0
+186826	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Lactobacillales	order	Lactobacillales	Bacteria	25470.0	49.40642458100559	25486	25454	0
+398511	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Bacillales|Bacillaceae|Bacillus|Bacillus_pseudofirmus|Bacillus_pseudofirmus_OF4	no_rank	Bacillus_pseudofirmus_OF4	Bacteria	26082.0	50.59357541899441	26098	26066	4249248
+1385	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Bacillales	order	Bacillales	Bacteria	26082.0	50.59357541899441	26098	26066	0
+1578	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Lactobacillales|Lactobacillaceae|Lactobacillus	genus	Lactobacillus	Bacteria	25470.0	49.40642458100559	25486	25454	0
+1386	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Bacillales|Bacillaceae|Bacillus	genus	Bacillus	Bacteria	26082.0	50.59357541899441	26098	26066	0
+79885	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Bacillales|Bacillaceae|Bacillus|Bacillus_pseudofirmus	species	Bacillus_pseudofirmus	Bacteria	26082.0	50.59357541899441	26098	26066	0
+131567	root|cellular_organisms	no_rank	cellular_organisms	root	51552.0	100.0	51552	51552	0
+1783272	root|cellular_organisms|Bacteria|Terrabacteria_group	no_rank	Terrabacteria_group	Bacteria	51552.0	100.0	51552	51552	0
+91061	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli	class	Bacilli	Bacteria	51552.0	100.0	51552	51552	0
+1239	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes	phylum	Firmicutes	Bacteria	51552.0	100.0	51552	51552	0
+1624	root|cellular_organisms|Bacteria|Terrabacteria_group|Firmicutes|Bacilli|Lactobacillales|Lactobacillaceae|Lactobacillus|Lactobacillus_salivarius	species	Lactobacillus_salivarius	Bacteria	25470.0	49.40642458100559	25486	25454	0

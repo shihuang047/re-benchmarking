@@ -1,0 +1,1 @@
+All Raw data is stored in Channing Sever (capecod.bwh.harvard.edu) at: /udd/spzsu/simulation_data_benchimarking/simulated_shotgun_for_pitfallpaper

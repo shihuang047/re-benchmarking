@@ -1,0 +1,36 @@
+Wilcox.test_paired				
+	tax			
+		Bray	mOTUs2-kraken2	5.96E-07
+		Bray	mOTUs2-bracken	1.13E-06
+		Bray	MPA2-kraken2	1.79E-07
+		Bray	MPA2-bracken	1.19E-07
+		rJSD	mOTUs2-kraken2	6.73E-03
+		rJSD	mOTUs2-bracken	3.67E-02
+		rJSD	MPA2-kraken2	3.82E-05
+		rJSD	MPA2-bracken	1.62E-04
+		L2	mOTUs2-kraken2	1.63E-03
+		L2	mOTUs2-bracken	5.07E-03
+		L2	MPA2-kraken2	1.62E-04
+		L2	MPA2-bracken	1.03E-03
+		L1	mOTUs2-kraken2	1.97E-06
+		L1	mOTUs2-bracken	3.82E-05
+		L1	MPA2-kraken2	2.98E-07
+		L1	MPA2-bracken	1.49E-06
+				
+	seq			
+		Bray	mOTUs2-kraken2	5.25E-06
+		Bray	mOTUs2-bracken	5.96E-08
+		Bray	MPA2-kraken2	1.62E-04
+		Bray	MPA2-bracken	1.19E-07
+		rJSD	mOTUs2-kraken2	3.20E-05
+		rJSD	mOTUs2-bracken	1.97E-06
+		rJSD	MPA2-kraken2	8.80E-05
+		rJSD	MPA2-bracken	8.35E-07
+		L2	mOTUs2-kraken2	4.17E-07
+		L2	mOTUs2-bracken	2.98E-07
+		L2	MPA2-kraken2	1.19E-07
+		L2	MPA2-bracken	5.96E-08
+		L1	mOTUs2-kraken2	5.96E-08
+		L1	mOTUs2-bracken	5.96E-08
+		L1	MPA2-kraken2	5.96E-08
+		L1	MPA2-bracken	5.96E-08
