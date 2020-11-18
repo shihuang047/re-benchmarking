@@ -1,7 +1,0 @@
-library(ggplot2)
-a <- read.table("data_genome_size.txt", header = T, sep = "\t")
-ggplot(a, aes(x = genome_size, fill = superkingdom)) + 
-  geom_histogram(position="identity", alpha = 0.7, binwidth = 0.1) + 
-  scale_x_continuous(limits = c(0,15), breaks = seq(0, 15, 1)) + 
-  ylim(0,500) + theme_bw() + 
-  facet_wrap(~assembly_level,scales = "free")
