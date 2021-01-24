@@ -12,7 +12,7 @@ Microbial identification and accurate abundance estimation are still challenging
 **Abundance estimation: sequence abundance VS taxonomic abundance** Microbial abundance in the metagenomics data can be considered either as the relative abundance of reads from each taxa ("sequence abundance") or by inferring abundance of the number of individuals from each taxa by correcting read counts for genome size ("taxonomic abundance"). However, such correction for genome length into abundance estimation is usually missed in most state-of-the-art profilers. Even though it can be manually performed by reweighting the read counts after classification, [previous benchmarking studies](https://www.sciencedirect.com/science/article/pii/S0092867419307755) did not perform appropriate corrections and still used "raw" abundance profiles generated from benchmarked profilers for performance comparisons , resulting in highly misleading or even contradictory conclusions.
 
 ## System requirements and installation guide
-All the scripts are programmed using R version 3.6.3 and stroed in folder "Manuscript".
+All the scripts are programmed using R (3.6.3) or Python (3.6.10) and stroed in folder "Manuscript".
 For more details please refer to "Readme.txt" under each folder.
 RStudio in Windows is recommended to perform visualzation of main figures (please see "Manuscript/Figures").
 
