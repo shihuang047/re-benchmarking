@@ -1,0 +1,3 @@
+[submodule "Manuscript/Profiles"]
+	path = Manuscript/Profiles
+	url = https://github.com/lh3/wgsim
